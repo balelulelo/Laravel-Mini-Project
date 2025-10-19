@@ -47,7 +47,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function studyprofile(): HasOne
+    public function StudyProfile(): HasOne
     {
         return $this->hasOne(studyprofile::class);
     }
