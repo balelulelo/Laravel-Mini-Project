@@ -14,7 +14,7 @@
     <p class="text-gray-600 dark:text-gray-400">
         <strong>Major:</strong> {{ $partner->major }}
     </p>
-    <a href="{{ route('partners.show', ['id' => $partner->id]) }}" class="text-primary-600 dark:text-primary-400 font-medium hover:underline mt-4 inline-block">
+    <a href="{{ route('partners.show', ['studyProfile' => $partner]) }}" class="text-primary-600 dark:text-primary-400 font-medium hover:underline mt-4 inline-block">
         View Details &rarr;
     </a>
 </div>

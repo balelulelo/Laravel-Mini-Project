@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 use App\Models\User;
+use App\Models\StudyProfile;
 
 class ProfileController extends Controller
 {
@@ -81,9 +82,20 @@ class ProfileController extends Controller
             'study_interests' => 'nullable|string|max:1000',
         ]);
 
-        $studyProfile->fill($validatedData);
+        $studyProfile->update($validatedData);
         $studyProfile->save();
 
         return Redirect::route('profile.study.edit')->with('status', 'study-profile-updated');
+    }
+
+    public function destroyStudyProfile(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+        $studyProfile = optional($user->studyprofile);
+
+        if ($studyProfile) {
+            $studyProfile->delete();
+        }
+        return Redirect::route('profile.edit')->with('status', 'study-profile-deleted');
     }
 }

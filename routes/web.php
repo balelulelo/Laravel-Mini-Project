@@ -18,8 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/profile/study', [ProfileController::class, 'editStudyProfile'])->name('profile.study.edit');
     Route::patch('/profile/study', [ProfileController::class, 'updateStudyProfile'])->name('profile.study.update');
+    Route::delete('/profile/study', [ProfileController::class, 'destroyStudyProfile'])->name('profile.study.destroy');
     Route::get('/partners', [PartnerController::class, 'index'])->name('partners.index');
-    Route::get('/partners/{id}', [PartnerController::class, 'show'])->name('partners.show');
+    Route::get('/partner/{studyProfile}', [PartnerController::class, 'show'])->name('partners.show');
 });
 
 require __DIR__.'/auth.php';

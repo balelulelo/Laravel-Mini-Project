@@ -18,6 +18,15 @@
                                     {{ __("Manage your public study profile information.") }}
                                 </p>
                         </header>
+                        
+                        @if (session('status') === 'study-profile-deleted')
+                            <p
+                                x-data="{ show: true }" x-show="show" x-transition
+                                x-init="setTimeout(() => show = false, 2000)"
+                                class="text-sm mt-4 text-green-600 dark:text-green-400"
+                            >{{ __('Study profile deleted successfully.') }}</p>
+                        @endif
+
                             <div class="mt-6">
                                 <a href="{{ route('profile.study.edit') }}">
                                     <x-primary-button>

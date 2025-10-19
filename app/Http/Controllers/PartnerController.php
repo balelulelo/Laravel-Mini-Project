@@ -16,10 +16,13 @@ class PartnerController extends Controller
         return view('partners.index', ['partners' => $partners]);
     }
 
-    public function show(int $id): View
+    public function show(StudyProfile $studyProfile): View
     {
-        $partner = StudyProfile::with('user')->findOrFail($id);
+        $studyProfile->load('user'); 
 
-        return view('partners.show', ['partner' => $partner]);
+        return view('partners.show', [
+            'partner' => $studyProfile
+        ]);
     }
 }
+
