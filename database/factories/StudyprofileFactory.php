@@ -16,6 +16,11 @@ class StudyprofileFactory extends Factory
      */
     public function definition(): array
     {
+
+        $subjects = ['Artificial Intelligence', 'Quantum Computing', 'Renewable Energy', 'Cybersecurity', 'Data Science', 'Machine Learning', 'Nervous System', 'Astrophysics', 
+        'International Diplomacy', 'Graphic Design', 'Neuroscience', 'Genetics', 'Robotics', 'Environmental Science', 'Cognitive Psychology' ];
+
+
         return [
             'bio' => fake()->sentence(15), 
             'city' => fake()->city(), 
@@ -35,7 +40,7 @@ class StudyprofileFactory extends Factory
                 'Literature',
                 'Pharmacy'
             ]),
-            'study_interests' => implode(', ', fake()->words(3)),
+            'study_interests' => implode(', ', fake()->randomElements($subjects, rand(1, 3))),
         ];
     }
 }
