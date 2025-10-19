@@ -28,7 +28,7 @@ Route::get('/partners', function () {
         [
             'id' => 2,
             'name' => 'Alice Smith',
-            'major' => 'Information Systems',
+            'major' => 'Information Technology',
         ],
         [
             'id' => 3,
@@ -44,11 +44,13 @@ Route::get('/partner/{id}', function ($id) {
 
     $partners = [
         ['id' => 1, 'name' => 'Jane Doe', 'city' => 'Surabaya', 'major' => 'Physics', 'interest' => 'Explosives Engineering'],
-        ['id' => 2, 'name' => 'Alice Smith', 'city' => 'Bandung', 'major' => 'Information Systems', 'interest' => 'Cybersecurity'],
+        ['id' => 2, 'name' => 'Alice Smith', 'city' => 'Bandung', 'major' => 'Information Technology', 'interest' => 'Cybersecurity'],
         ['id' => 3, 'name' => 'Fuad Shinjuku', 'city' => 'Tokyo', 'major' => 'International Relations', 'interest' => 'Diplomacy'],
     ];
 
-    return view('partners.show', ['id' => $id]);
+    $foundPartner = collect($partners)->firstWhere('id', '==', $id);
+
+    return view('partners.show', ['partner' => $foundPartner]);
 })->name('partners.show');
 
 require __DIR__.'/auth.php';

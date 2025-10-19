@@ -1,31 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Partner Lists</title>
-    <style>
-        body { font-family: sans-serif; line-height: 1.5; }
-        .partner-card { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
-        .empty { color: #777; }
-    </style>
-</head>
-<body>
-    <h1>All Available Study Partners</h1>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Find a Study Partner') }}
+        </h2>
+    </x-slot>
 
-    @forelse ($partners as $partner)
-            <div class="partner-card">
-                <h3>{{ $partner['name'] }}</h3>
-                <p>
-                    <strong>Major:</strong> {{ $partner['major'] }}
-                </p>
-                <a href="{{ route('partners.show', ['id' => $partner['id']]) }}">
-                    View Details &rarr; 
-                </a>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    
+                    <h3 class="text-lg font-medium mb-4">All Available Partners:</h3>
+
+                    <div class="space-y-4">
+                        @forelse ($partners as $partner)
+                            <x-partner-card :partner="$partner" />
+                        @empty
+                            <p>No study partners are available at this time.</p>
+                        @endforelse
+                    </div>
+
+                </div>
             </div>
-        @empty
-            <p class="empty">No study partners available right now.</p>
-    @endforelse
-
-</body>
-</html>
+        </div>
+    </div>
+</x-app-layout>
