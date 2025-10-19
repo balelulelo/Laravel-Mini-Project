@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use App\Models\User;
+
 class ProfileController extends Controller
 {
     /**
@@ -56,5 +58,32 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function editStudyProfile(Request $request) : View 
+    {
+        $user = $request->user();
+        $studyProfile = $user->studyprofile()->firstOrCreate(['user_id' => $user->id], []);
+
+        return view('profile.study-edit', ['studyProfile' => $studyProfile,]);
+        
+    }
+
+    public function updateStudyProfile(Request $request) : RedirectResponse 
+    {
+        $user = $request->user();
+        $studyProfile = $user->studyprofile()->firstOrCreate(['user_id' => $user->id], []);
+
+        $validatedData = $request->validate([
+            'bio' => 'nullable|string|max:1000',
+            'city' => 'nullable|string|max:255',
+            'major' => 'nullable|string|max:255',
+            'study_interests' => 'nullable|string|max:1000',
+        ]);
+
+        $studyProfile->fill($validatedData);
+        $studyProfile->save();
+
+        return Redirect::route('profile.study.edit')->with('status', 'study-profile-updated');
     }
 }

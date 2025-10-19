@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+use App\Models\StudyProfile;
+
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -49,6 +51,6 @@ class User extends Authenticatable
 
     public function StudyProfile(): HasOne
     {
-        return $this->hasOne(studyprofile::class);
+        return $this->hasOne(StudyProfile::class);
     }
 }

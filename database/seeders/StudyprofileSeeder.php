@@ -8,7 +8,7 @@ use App\Models\StudyProfile;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class StudyprofileSeeder extends Seeder
+class StudyProfileSeeder extends Seeder
 {
     /**
      * Run the database seeds.
