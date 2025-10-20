@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\ConnectionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,6 +22,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/study', [ProfileController::class, 'destroyStudyProfile'])->name('profile.study.destroy');
     Route::get('/partners', [PartnerController::class, 'index'])->name('partners.index');
     Route::get('/partner/{studyProfile}', [PartnerController::class, 'show'])->name('partners.show');
+    Route::post('/connections/{user}', [ConnectionController::class, 'store'])->name('connections.store');
+    Route::delete('/connections/{user}', [ConnectionController::class, 'destroy'])->name('connections.destroy');
+
 });
 
 require __DIR__.'/auth.php';

@@ -11,6 +11,7 @@ use Illuminate\View\View;
 
 use App\Models\User;
 use App\Models\StudyProfile;
+use App\Models\Subject;
 
 class ProfileController extends Controller
 {
@@ -66,7 +67,11 @@ class ProfileController extends Controller
         $user = $request->user();
         $studyProfile = $user->studyprofile()->firstOrCreate(['user_id' => $user->id], []);
 
-        return view('profile.study-edit', ['studyProfile' => $studyProfile,]);
+        $allSubjects = Subject::orderBy('name')->get();
+        $userSubjectIds = $studyProfile->subjects()->pluck('subjects.id')->toArray();
+
+
+        return view('profile.study-edit', ['studyProfile' => $studyProfile, 'allSubjects' => $allSubjects, 'userSubjectIds' => $userSubjectIds]);
         
     }
 
@@ -79,11 +84,12 @@ class ProfileController extends Controller
             'bio' => 'nullable|string|max:1000',
             'city' => 'nullable|string|max:255',
             'major' => 'nullable|string|max:255',
-            'study_interests' => 'nullable|string|max:1000',
+            'subjects' => 'nullable|array',
+            'subjects.*' => 'exists:subjects,id',
         ]);
 
-        $studyProfile->update($validatedData);
-        $studyProfile->save();
+        $studyProfile->update($request->except('subjects'));
+        $studyProfile->subjects()->sync($request->input('subjects', []));
 
         return Redirect::route('profile.study.edit')->with('status', 'study-profile-updated');
     }

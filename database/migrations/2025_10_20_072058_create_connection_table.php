@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('study_profiles', function (Blueprint $table) {
-            $table->id();
+        Schema::create('connection', function (Blueprint $table) {
+            
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('bio')->nullable();
-            $table->string('city')->nullable();
-            $table->string('major')->nullable();
-            $table->timestamps();
+            $table->foreignId('connected_user_id')->constrained('users')->onDelete('cascade');
+            $table->primary(['user_id', 'connected_user_id']);
         });
     }
 
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('studyprofiles');
+        Schema::dropIfExists('connection');
     }
 };

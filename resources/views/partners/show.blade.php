@@ -27,8 +27,17 @@
                         </div>
                         <div class="md:col-span-2">
                             <h4 class="font-semibold text-gray-500 dark:text-gray-400">Interests</h4>
-                            <p class="text-lg bg-gray-100 dark:bg-gray-700 p-3 rounded-md">
-                                {{ $partner->study_interests }}
+                            @if($partner->subjects->isNotEmpty())
+                                <div class="flex flex-wrap gap-2 mt-2">
+                                    @foreach($partner->subjects as $subject)
+                                        <span class="inline-block bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                            {{ $subject->name }}
+                                        </span>
+                                    @endforeach
+                                </div>
+                            @else
+                                <p class="text-lg text-gray-500 dark:text-gray-400">No specific subjects listed.</p>
+                            @endif
                             </p>
                         </div>
                     </div>
