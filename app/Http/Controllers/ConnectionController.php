@@ -13,9 +13,9 @@ class ConnectionController extends Controller
     public function store(Request $request, User $user): RedirectResponse
     {
 
-        $request->validate([
-            'connected_user_id' => 'required|exists:users,id|different:user_id',
-        ]);
+        // $request->validate([
+        //     'connected_user_id' => 'required|exists:users,id|different:user_id',
+        // ]);
 
         $currentUser = Auth::user();
 

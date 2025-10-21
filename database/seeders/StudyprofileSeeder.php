@@ -15,7 +15,7 @@ class StudyProfileSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->count(60)->has(StudyProfile::factory())->create();
+        User::factory()->count(120)->has(StudyProfile::factory())->create();
         User::factory()->has(StudyProfile::factory())->create(['name' => 'Atmin','email' => 'atmin67@example.com',]);
     }
 }
