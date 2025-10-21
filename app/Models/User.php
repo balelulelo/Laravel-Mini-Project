@@ -50,7 +50,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function StudyProfile(): HasOne
+    public function studyprofile(): HasOne
     {
         return $this->hasOne(StudyProfile::class);
     }
@@ -58,12 +58,12 @@ class User extends Authenticatable
 
     public function connections(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'connections', 'user_id', 'connected_user_id');
+        return $this->belongsToMany(User::class, 'connection', 'user_id', 'connected_user_id');
         
     }
 
     public function connectedBy(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'connections', 'connected_user_id', 'user_id');
+        return $this->belongsToMany(User::class, 'connection', 'connected_user_id', 'user_id');
     }
 }

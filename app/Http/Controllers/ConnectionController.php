@@ -12,6 +12,7 @@ class ConnectionController extends Controller
 {
     public function store(Request $request, User $user): RedirectResponse
     {
+
         $request->validate([
             'connected_user_id' => 'required|exists:users,id|different:user_id',
         ]);
@@ -28,7 +29,7 @@ class ConnectionController extends Controller
 
         $currentUser->connections()->attach($user->id);
 
-        return redirect()->back()->with('success', 'Successfully connected to the user.');
+        return redirect()->back()->with('status', 'Successfully connected to the user.');
     }
 
     public function destroy(Request $request, User $user): RedirectResponse
@@ -41,6 +42,6 @@ class ConnectionController extends Controller
 
         $currentUser->connections()->detach($user->id);
 
-        return redirect()->back()->with('success', 'Successfully removed user from connections.');
+        return redirect()->back()->with('status', 'Successfully removed user from connections.');
     }
 }

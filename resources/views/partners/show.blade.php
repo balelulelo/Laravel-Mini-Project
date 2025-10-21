@@ -41,7 +41,7 @@
                         @auth 
                             @if (Auth::id() !== $partner->user->id)
                                 @if ($isConnected)
-                                    <form method="POST" action="{{ route('connections.destroy', ['userToDisconnect' => $partner->user->id]) }}">
+                                    <form method="POST" action="{{ route('connections.destroy', ['user' => $partner->user]) }}">
                                         @csrf
                                         @method('DELETE')
                                         <x-danger-button type="submit">
@@ -49,7 +49,7 @@
                                         </x-danger-button>
                                     </form>
                                 @else
-                                    <form method="POST" action="{{ route('connections.store', ['userToConnect' => $partner->user->id]) }}">
+                                    <form method="POST" action="{{ route('connections.store', ['user' => $partner->user]) }}">
                                         @csrf
                                         <x-primary-button type="submit">
                                             Connect
