@@ -8,6 +8,10 @@
 
 A simple web application built with Laravel to help users find study partners based on  major and study interests (subjects).
 
+Link to the demo video:
+
+https://youtu.be/CiJFJXiSbEo
+
 ## Project Plan 
 
 
